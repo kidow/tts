@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import type { FormEvent } from 'react'
+import { FormEvent, useEffect } from 'react'
 import { useObjectState } from 'services'
 import { PlayIcon, PauseIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import { Spinner } from 'components'
@@ -72,15 +72,30 @@ const HomePage: NextPage = () => {
       setState({ isLoading: false })
     }
   }
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', () => {
+      window.speechSynthesis.cancel()
+    })
+  }, [])
   return (
     <>
       <Head>
         <title>TTS by Kidow</title>
       </Head>
-      <div className="mx-auto max-w-5xl py-16">
+      <div className="mx-auto max-w-5xl space-y-4 py-16">
+        <div className="mb-16 space-y-4 text-center">
+          <h1 className="bg-gradient-to-r from-rose-500 to-blue-500 bg-clip-text text-5xl font-bold text-transparent">
+            블로그 글을 오디오로 들어보세요.
+          </h1>
+          <p className="text-xl font-semibold">
+            URL을 입력하면 컨텐츠를 오디오로 재생시켜 줍니다.
+          </p>
+        </div>
+
         <form
           onSubmit={onSubmit}
-          className="flex items-center gap-4 rounded-full border py-1 pr-1 pl-4"
+          className="flex items-center gap-4 rounded-full border border-neutral-500 py-1 pr-1 pl-4 focus-within:ring-4"
         >
           <input
             className="flex-1 text-2xl"
@@ -120,7 +135,7 @@ const HomePage: NextPage = () => {
           </button>
         </form>
 
-        <div className="mx-auto max-w-2xl">
+        <div className="mx-auto max-w-2xl py-4">
           <div>
             <input
               type="range"
@@ -142,6 +157,31 @@ const HomePage: NextPage = () => {
               max={2}
             />
             <span>{pitch}</span>
+          </div>
+        </div>
+
+        <div>
+          <div className="mb-2 text-lg font-semibold">가능한 블로그들</div>
+          <div className="grid grid-cols-4 gap-4">
+            <div>
+              <img src="/brunch.png" alt="" className="h-40 rounded-xl" />
+              <div className="mt-1">Brunch</div>
+              <div className="text-xs text-neutral-400">
+                https://brunch.co.kr/@[author]/[id]
+              </div>
+            </div>
+
+            <div>
+              <img
+                src="/medium.png"
+                alt=""
+                className="h-40 rounded-xl bg-contain"
+              />
+              <div className="mt-1">Medium</div>
+              <div className="text-xs text-neutral-400">
+                https://medium.com/[author]/[title]
+              </div>
+            </div>
           </div>
         </div>
 

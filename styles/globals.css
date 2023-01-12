@@ -2,8 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo',
+    Pretendard, Roboto, 'Noto Sans KR', 'Segoe UI', 'Malgun Gothic', sans-serif;
+}
+
 @layer base {
+  html,
+  body {
+    @apply bg-neutral-900 text-neutral-50;
+  }
   input {
-    @apply outline-none;
+    @apply bg-transparent outline-none;
   }
 }
