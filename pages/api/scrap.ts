@@ -13,8 +13,8 @@ const executablePath =
     : '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
-  if (typeof req.query.url !== 'string' || !req.query.url) {
-    res.json({ success: false, message: 'req.query.url is not string type.' })
+  if (!req.body.url) {
+    res.json({ success: false, message: 'req.body.url is not existed.' })
     return
   }
 
@@ -28,13 +28,19 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       ignoreHTTPSErrors: true
     })
     const page = await browser.newPage()
-    await page.goto(req.query.url)
+    await page.goto(req.body.url)
     const content = await page.content()
     const $ = cheerio.load(content)
 
     // Brunch
-    if (req.query.url.startsWith('https://brunch.co.kr/')) {
-      text = $('.wrap_body > p.item_type_text').text()
+    if (req.body.url.startsWith('https://brunch.co.kr/')) {
+      const title = $('h1.cover_title').text()
+      text = `제목: ${title}` + $('.wrap_body > p.item_type_text').text()
+    }
+
+    // Medium
+    if (req.body.url.startsWith('https://medium.com/')) {
+      text = $('p.pw-post-body-paragraph').text()
     }
 
     await browser.close()
