@@ -11,10 +11,10 @@
   "dependencies": {
     "@heroicons/react": "^2.0.13",
     "cheerio": "^1.0.0-rc.12",
-    "chrome-aws-lambda": "^10.1.0",
+    "chrome-aws-lambda": "^6.0.0",
     "classnames": "^2.3.2",
     "next": "13.1.1",
-    "puppeteer-core": "^10.4.0",
+    "puppeteer-core": "^6.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
