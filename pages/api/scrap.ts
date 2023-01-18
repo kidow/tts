@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import urlMetadata from 'url-metadata'
 import puppeteer from 'puppeteer-core'
 import * as cheerio from 'cheerio'
 import chrome from 'chrome-aws-lambda'
