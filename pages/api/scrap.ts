@@ -29,6 +29,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     const page = await browser.newPage()
     await page.goto(req.body.url)
     const content = await page.content()
+    await browser.close()
     const $ = cheerio.load(content)
 
     // Brunch
@@ -37,7 +38,11 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       text = `제목: ${title}` + $('.wrap_body > p.item_type_text').text()
     }
 
-    await browser.close()
+    // Medium
+    if (req.body.url.startsWith('https://medium.com/')) {
+      text = $('p.pw-post-body-paragraph').text()
+    }
+
     res.json({ success: true, result: text })
   } catch (err) {
     res.json({ success: false, result: err })
