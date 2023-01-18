@@ -37,11 +37,6 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       text = `제목: ${title}` + $('.wrap_body > p.item_type_text').text()
     }
 
-    // Medium
-    if (req.body.url.startsWith('https://medium.com/')) {
-      text = $('p.pw-post-body-paragraph').text()
-    }
-
     await browser.close()
     res.json({ success: true, result: text })
   } catch (err) {
