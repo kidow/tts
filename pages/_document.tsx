@@ -40,6 +40,13 @@ export default class MyDocument extends Document {
             href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
           />
           <meta name="msapplication-TileColor" content="#000" />
+          <script
+            type="text/javascript"
+            async
+            defer
+            src="https://cdn.feedbank.app/plugin.js"
+            plugin-key="43e623b6-2c26-42d4-b9b9-50d1fd5828a3"
+          />
         </Head>
         <body>
           <Main />
