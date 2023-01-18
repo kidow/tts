@@ -46,6 +46,7 @@ export default class MyDocument extends Document {
             defer
             src="https://yellow.feedbank.app/plugin.js"
             plugin-key="43e623b6-2c26-42d4-b9b9-50d1fd5828a3"
+            data-fb-hide
           />
         </Head>
         <body>
